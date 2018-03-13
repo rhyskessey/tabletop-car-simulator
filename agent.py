@@ -1,10 +1,8 @@
 import vehicle
 
 class Agent():
-    def __init__(self, ID):
+    def __init__(self, ID, vehicleType=vehicle.Car):
         self.ID = ID
-        self.myVehicle = vehicle.Vehicle()
+        self.vehicle = vehicleType(self)
+        self.worldKnowledge = {'waypoints': [], 'obstacles': []}
 
-    # Update the agent's world knowledge.
-    def update(self, worldInfo):
-        self.worldInfo = worldInfo

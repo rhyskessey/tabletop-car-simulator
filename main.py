@@ -1,20 +1,15 @@
-import world, vision, display, agent
+import world, vision, display
 
-NUM_AGENTS = 4
+NUM_AGENTS = 2
 
 if __name__ == "__main__":
     # System initialisation.
-    world = world.World()
     vision = vision.Vision()
     display = display.Display()
-    agents = []
-    for i in range(NUM_AGENTS):
-        agents.append(agent.Agent(i))
+    world = world.World(NUM_AGENTS)
 
     # Event loop.
     while True:
-        carPositions = vision.getCarPositions()
-        world.update(carPositions)
-        display.update(world.getWorldInfo())
-        for agent in agents:
-            agent.update(world.getWorldInfo(agentID=agent.ID))
+        car_locations = vision.locateCars()
+        world.update(car_locations)
+        display.update(world.getWorldData())
