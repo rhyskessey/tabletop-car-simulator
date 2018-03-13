@@ -28,6 +28,7 @@ class Service(socketserver.BaseRequestHandler):
 
             print('Handling request')
             if not (self.data):
+                print("No data received.")
                 break
 
         self.request.close()
