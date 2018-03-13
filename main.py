@@ -13,4 +13,3 @@ if __name__ == "__main__":
         car_locations = vision.locateCars()
         world.update(car_locations)
         display.update(world.getWorldData())
-        print("loop")
