@@ -1,34 +1,36 @@
-
-import socketserver
-import threading
+import server
+import json
+from time import time
+from zenwheels.cars import MAC_TO_ID
 
 class Vision():
     def __init__(self):
-        print("VISION: Start server...")
-        t = ThreadedTCPServer(('localhost', 1520), Service)
-        server_thread = threading.Thread(target=t.serve_forever())
-        server_thread.daemon = True
-        server_thread.start()
+        s = server.Server()
 
     # Return the ID, pixel coordinates and orientation of every ZenWheels car.
     def locateCars(self):
+        visionData = parse_json(server.latest_message)
+        if visionData == None:
+            return []
+        if visionData['time']/1000 + 1 < time(): # Data is older than one second - discard.
+            return []
+
+        print(visionData)
+
         car_locations = []
+        for mac_address in MAC_TO_ID:
+            if mac_address in visionData:
+                agentID = MAC_TO_ID[mac_address]
+                pos = (visionData[mac_address][1], visionData[mac_address][2])
+                angle = visionData[mac_address][5]
+                observed_car = {'ID': agentID, 'position': pos, 'orientation': angle}
+                car_locations.append(observed_car)
         return car_locations
 
 
-class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
-    pass
-
-class Service(socketserver.BaseRequestHandler):
-    def handle(self):
-        while 1:
-            self.data = self.request.recv(1024)
-
-            print("Data: ", self.data)
-
-            print('Handling request')
-            if not (self.data):
-                print("No data received.")
-                break
-
-        self.request.close()
+def parse_json(msg):
+    try:
+        dict = json.loads(msg)
+        return dict
+    except:
+        return None

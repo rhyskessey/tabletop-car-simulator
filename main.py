@@ -1,12 +1,16 @@
-import world, vision, display
+from world import World
+from vision import Vision
+from display import Display
+from zenwheels.comms import CarCommunicator
 
-NUM_AGENTS = 2
+ACTIVE_AGENTS = [45, 10]
 
 if __name__ == "__main__":
     # System initialisation.
-    vision = vision.Vision()
-    display = display.Display()
-    world = world.World(NUM_AGENTS)
+    vision = Vision()
+    display = Display()
+    world = World(ACTIVE_AGENTS)
+    comms = CarCommunicator()
 
     # Event loop.
     while True:

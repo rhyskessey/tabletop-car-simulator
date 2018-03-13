@@ -1,8 +1,8 @@
 import pygame
 from pygame.locals import *
 
-DISPLAY_WIDTH = 640
-DISPLAY_HEIGHT = 480
+DISPLAY_WIDTH = 1200
+DISPLAY_HEIGHT = 900
 BACKGROUND_IMAGE_PATH = "media/map_image.jpg"
 
 class Display():
@@ -22,18 +22,19 @@ class Display():
     def createImage(self, worldData):
         self.screen.blit(self.background_image, (0,0))
         for vehicle in worldData['vehicles']:
-            pos = (vehicle.position[0], vehicle.position[1])
-            angle = vehicle.orientation
-            width, length = vehicle.dimensions
             try:
+                pos = (vehicle.position[0], DISPLAY_HEIGHT - vehicle.position[1])
+                angle = vehicle.orientation
+                width, length = vehicle.dimensions
                 template = pygame.Surface((width,length))
-                template.fill((0,255,255))
+                template.fill((255,255,255))
                 template.set_colorkey((255,0,0))
                 img = pygame.transform.rotate(template, angle)
                 img_rect = img.get_rect(center=pos)
                 self.screen.blit(img, img_rect)
             except:
-                print("ERROR: Could not display vehicle owned by Agent " + str(vehicle.owner.ID) + ".")
+                pass
+                #print("ERROR: Could not display vehicle owned by Agent " + str(vehicle.owner.ID) + ".")
 
     # Update the world display.
     def update(self, worldData):

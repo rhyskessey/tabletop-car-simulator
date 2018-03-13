@@ -1,20 +1,21 @@
-import agent
+from agent import Agent
 
 class World():
-    def __init__(self, numAgents):
+    def __init__(self, agentIDs):
         # Initialise agents and their vehicles.
         agents = []
         vehicles = []
-        for i in range(numAgents):
-            agents.append(agent.Agent(i))
-            vehicles.append(agents[i].vehicle)
+        for agentID in range(agentIDs):
+            agent = Agent(agentID)
+            agents.append(agent)
+            vehicles.append(agent.vehicle)
         self.worldData = {'agents': agents, 'vehicles': vehicles}
 
     # Update the world state.
     def update(self, car_locations):
         for observed_car in car_locations:
             for known_vehicle in self.worldData['vehicles']:
-                if observed_car['ID'] == known_vehicle.owner.ID:
+                if int(observed_car['ID']) == known_vehicle.owner.ID:
                     known_vehicle.position = observed_car['position']
                     known_vehicle.orientation = observed_car['orientation']
 

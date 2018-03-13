@@ -14,6 +14,7 @@ class Vehicle:
     def __init__(self, owner):
         self.owner = owner
 
+
 class Car(Vehicle):
     def __init__(self, owner):
         Vehicle.__init__(self, owner)
