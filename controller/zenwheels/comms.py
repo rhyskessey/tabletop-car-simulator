@@ -1,8 +1,10 @@
-import time
-import threading
-from bluetooth import *
 import select
-from zenwheels.cars import ID_TO_MAC
+import threading
+import time
+
+from bluetooth import *
+
+from controller.zenwheels.cars import ID_TO_MAC
 
 msgHeader = "[CAR COMMS]: "
 
