@@ -1,6 +1,6 @@
 import time
 
-from controller.zenwheels.protocol import *
+from zenwheels.protocol import *
 
 
 class Vehicle:

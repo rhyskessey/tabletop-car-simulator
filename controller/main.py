@@ -1,10 +1,10 @@
 from agent import Agent
 from vision import Vision
 from world import World
+from display import Display
 from zenwheels.cars import *
 from zenwheels.comms import CarCommunicator
 
-from controller.display import Display
 
 ACTIVE_CARS = [ORANGE_CAR_ID]
 

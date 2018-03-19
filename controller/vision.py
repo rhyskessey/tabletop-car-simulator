@@ -4,7 +4,7 @@ import socketserver
 import threading
 from time import time
 
-from controller.zenwheels.cars import MAC_TO_ID
+from zenwheels.cars import MAC_TO_ID
 
 msgHeader = "[VISION]: "
 

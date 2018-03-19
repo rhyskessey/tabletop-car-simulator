@@ -4,7 +4,7 @@ import time
 
 from bluetooth import *
 
-from controller.zenwheels.cars import ID_TO_MAC
+from zenwheels.cars import ID_TO_MAC
 
 msgHeader = "[CAR COMMS]: "
 

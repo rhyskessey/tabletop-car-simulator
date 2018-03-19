@@ -1,4 +1,4 @@
-from controller import vehicle
+import vehicle
 
 msgHeader = "[AGENT]: "
 
